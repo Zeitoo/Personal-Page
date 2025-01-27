@@ -1,0 +1,91 @@
+import { NavLink, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import Home from "./Home";
+import NotFound from "./NotFound";
+import About from "./About";
+import Projects from "./Projects";
+
+import { AnimatePresence } from "framer-motion";
+
+export default function HomeLayout() {
+    const location = useLocation();
+
+    useEffect(() => {
+        const htmlELement = document.getElementsByTagName("html")
+         
+        switch (localStorage.getItem("theme")) {
+            case "light":
+                htmlELement[0].classList.remove("dark")
+                break
+                
+            case "dark":
+                htmlELement[0].classList.add("dark")
+                break
+        }
+    }, [])
+
+    const themeSwitch = () => {
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark") {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+            SetDarkMode(!darkMode);
+        } else {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+            SetDarkMode(!darkMode);
+        }
+    };
+
+    const [darkMode, SetDarkMode] = useState(
+        localStorage.getItem("theme") === "dark"
+    );
+
+    return (
+        <>
+            <header className="my-10 flex items-center justify-between">
+                <nav role="navigation" aria-label="Main Navigation">
+                    <ul className="flex gap-2 text-sm font-semibold">
+                        <li>
+                            <NavLink tabIndex={0} to="./">
+                                Início
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink tabIndex={0} to="./about">
+                                Sobre
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink tabIndex={0} to="./projects">
+                                Projetos
+                            </NavLink>
+                        </li>
+                    </ul>
+                </nav>
+
+                <button
+                    tabIndex={0}
+                    onClick={() => {
+                        themeSwitch();
+                    }}
+                    className="theme-toggler w-[25px] dark:invert transition-[filter] duration-1000"
+                    aria-label="Switch Theme"
+                ></button>
+            </header>
+
+            <div className="content my-10 ">
+                <AnimatePresence mode="wait">
+                    <Routes location={location} key={location.pathname}>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+
+                        <Route path="/projects" element={<Projects />} />
+                        <Route path="*" element={<NotFound />} />
+                    </Routes>
+                </AnimatePresence>
+            </div>
+        </>
+    );
+}

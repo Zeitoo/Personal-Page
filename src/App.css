@@ -1,0 +1,184 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --green: rgb(27, 230, 67);
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+    background: none;
+    padding: 10px 0;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 5px;
+}
+
+body {
+    min-height: 100vh;
+    margin: -50px auto;
+    overflow-x: hidden;
+}
+
+a {
+    display: flex;
+    gap: 1.5px;
+    flex-direction: column;
+    color: rgb(27, 230, 67);
+}
+
+header li::before {
+    display: none;
+}
+
+header a {
+    transition: background-color 0.2s ease-in;
+    border-radius: 5px;
+    padding: 10px;
+    color: inherit;
+}
+
+header a:hover {
+    background-color: rgba(27, 196, 230, 0.201);
+    color: rgb(27, 230, 67);
+}
+
+header a.active {
+    color: rgb(27, 230, 67);
+}
+
+.theme-toggler {
+    box-sizing: content-box;
+    background-position: center;
+    background-size: cover;
+    background-image: url(/dark_light.svg);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: white;
+}
+
+hr {
+    opacity: 0.5;
+}
+
+.foto {
+    pointer-events: none;
+    touch-action: none;
+    user-select: none;
+}
+
+.text-block {
+    opacity: 0;
+}
+
+.nome {
+    translate: 0 50px;
+}
+
+@media screen and (max-width: 500px) {
+    .nome {
+        font-size: 2em;
+    }
+}
+
+.nome span {
+    transform: translateY(-200%);
+    display: inline-block;
+    margin: 10px 0px;
+}
+
+.title {
+    translate: 0 30px;
+    overflow: hidden;
+}
+
+.title > div {
+    transform: translateY(-200%);
+    display: inline-block;
+    margin: 10px 0px;
+
+}
+
+html.dark footer li::after {
+    background-color: white;
+}
+
+li::before {
+    display: inline-block;
+    content: " ";
+    margin-right: 10px;
+    border-radius: 50%;
+    width: 10px;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--green);
+}
+
+.green {
+    color: var(--green);
+}
+
+.slide-in,
+.slide-out {
+    --bg: white;
+    pointer-events: none;
+    touch-action: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 100vw;
+    height: 100vh;
+    scale: 1.5;
+    background-color: var(--bg);
+    z-index: 100;
+}
+
+html.dark .slide-in,
+html.dark .slide-out {
+    --bg: black;
+}
+
+.content main {
+    position: relative;
+    z-index: 4;
+}
+
+main.projects .card {
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+main.projects .card .img{
+    width: 100%;
+    transition: background-image 1s ease-in-out;
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("./projects/felipe-bird.png");
+}
+
+main.projects .card .img:hover{
+    background-image: url("./projects/felipe-bird.gif");
+}
+
+main.projects .projects-wrapper {
+    grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 660px) {
+    main.projects .projects-wrapper {
+        align-items: center;
+        justify-content: center;
+        grid-template-columns: 1fr;
+    }
+}
