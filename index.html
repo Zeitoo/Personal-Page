@@ -45,9 +45,12 @@
     </head>
     <body
         id="root"
-        class="antialiased pt-10 bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 max-md:w-[80vw] w-[660px] transition text-sm"
+        class="antialiased pt-10 bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 max-md:w-[80vw] w-[660px] transition text-sm "
     >
+        <canvas class="text-block max-[550px]:hidden bg-white dark:invert fixed top-0 left-0 z-[-4] block" id="waveCanvas"></canvas>
         <div class="App" id="App"></div>
+        
+        <script src="src/background.js"></script>
         <script type="module" src="/src/main.jsx"></script>
     </body>
 </html>

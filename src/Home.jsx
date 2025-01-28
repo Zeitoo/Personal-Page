@@ -60,7 +60,7 @@ function Home() {
                             </div>
                         </div>
                         <div>
-                            <p className="block text-block">
+                            <p className="block font-medium text-block">
                                 Olá, meu nome é José Zeito, também conhecido
                                 como Jozeito. Nos últimos dois anos, tenho me
                                 dedicado ao estudo do mundo da Engenharia de
@@ -75,7 +75,7 @@ function Home() {
                     />
                 </div>
 
-                <div className="my-10 flex flex-col gap-5">
+                <div className="my-10 font-medium flex flex-col gap-5">
                     <p className="block text-block">
                         Por mais de dois anos, tenho estudado o mundo da
                         Engenharia de Software mais concretamente Front-end

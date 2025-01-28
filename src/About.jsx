@@ -28,7 +28,7 @@ function About() {
     });
 
     return (
-        <main className="pb-5">
+        <main className="pb-5 font-medium">
             <article>
                 <h1 className="font-bold title my-10 text-[2em]">
                     <div className="green">/</div>
@@ -140,7 +140,7 @@ function About() {
                     <ul className="flex flex-col gap-2">
                         <p>
                             Atualizado em{" "}
-                            <span className="green">Dezembro de 2024</span>.
+                            <span className="green">Janeiro de 2025</span>.
                         </p>
 
                         <li>
@@ -149,6 +149,7 @@ function About() {
                         </li>
                         <li>Aprendendo PHP;</li>
                         <li>Mexendo neste site.</li>
+                        <li>Dando voltas em Xai-Xai.</li>
                     </ul>
                 </div>
             </article>
