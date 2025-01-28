@@ -20,7 +20,7 @@
             content="Site pessoal de José Zeito, um desenvolvedor front-end especializado em HTML, CSS, JavaScript, e mais."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.jozeito.com" />
+        <meta property="og:url" content="https://www.jozeito.vercel.app" />
         <meta property="og:image" content="public/favicon.png" />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -28,11 +28,6 @@
             name="twitter:title"
             content="JoZeito - Desenvolvedor Front-end"
         />
-        <meta
-            name="twitter:description"
-            content="Site pessoal de José Zeito, um desenvolvedor front-end especializado em HTML, CSS, JavaScript, e mais."
-        />
-        <meta name="twitter:image" content="public/favicon.png" />
 
         <link
             rel="icon"
@@ -45,12 +40,125 @@
     </head>
     <body
         id="root"
-        class="antialiased pt-10 bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 max-md:w-[80vw] w-[660px] transition text-sm "
+        class="antialiased pt-10 bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 max-md:w-[80vw] w-[660px] transition text-sm"
     >
-        <canvas class="text-block max-[550px]:hidden bg-white dark:invert fixed top-0 left-0 z-[-4] block" id="waveCanvas"></canvas>
+        <canvas
+            class="text-block bg-white min-[499px]:hidden  dark:invert fixed top-0 left-0 z-[-4] block"
+            id="backgroundCanvas"
+        ></canvas>
+        <canvas
+            class="text-block max-[500px]:hidden bg-white dark:invert fixed top-0 left-0 z-[-4] block"
+            id="backgroundCanvasDesktop"
+        ></canvas>
+
         <div class="App" id="App"></div>
-        
-        <script src="src/background.js"></script>
+
+        <script>
+            const canvas = document.getElementById("backgroundCanvas");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const dots = [];
+
+            class Dot {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedY = Math.random() * 1 - 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.5;
+                }
+
+                update() {
+                    this.y += this.speedY;
+                    this.opacity -= 0.01;
+
+                    if (
+                        this.y < 0 ||
+                        this.y > canvas.height ||
+                        this.opacity <= 0
+                    ) {
+                        this.y = Math.random() * canvas.height;
+                        this.x = Math.random() * canvas.width;
+                        this.opacity = Math.random() * 0.5 + 0.5;
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 0, 0, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            function createDots() {
+                for (let i = 0; i < 200; i++) {
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    dots.push(new Dot(x, y));
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                dots.forEach((dot) => {
+                    dot.update();
+                    dot.draw();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            createDots();
+            animate();
+
+            window.addEventListener("resize", () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        </script>
+
+        <script>
+            const canvasDesktop = document.getElementById("backgroundCanvasDesktop");
+            const ctxDesktop = canvasDesktop.getContext("2d");
+
+            canvasDesktop.width = window.innerWidth;
+            canvasDesktop.height = window.innerHeight;
+
+            const cols = 50; // Quantidade de colunas
+            const rows = 20; // Quantidade de linhas
+            const spacing = 30; // Espaçamento entre os pontos
+            let time = 0;
+
+            function draw() {
+                ctxDesktop.clearRect(0, 0, canvasDesktop.width, canvasDesktop.height);
+                for (let y = 0; y < rows; y++) {
+                    for (let x = 0; x < cols; x++) {
+                        let xPos =
+                            x * spacing + (canvasDesktop.width - cols * spacing) / 2;
+                        let yPos =
+                            y * spacing + (canvasDesktop.height - rows * spacing) / 2;
+                        let offset = Math.sin((x + time) * 0.3) * 5; // Movimento de onda
+                        let randomBlink = Math.random() > 0.9 ? 0 : 1; // Piscar aleatório
+                        let opacity =
+                            ((Math.sin((x + y + time) * 0.2) + 1) / 2) *
+                            randomBlink; // Efeito de piscada
+
+                        ctxDesktop.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+                        ctxDesktop.beginPath();
+                        ctxDesktop.arc(xPos, yPos + offset, 1, 0, Math.PI * 2); // Pontos menores
+                        ctxDesktop.fill();
+                    }
+                }
+                time += 0.1;
+                requestAnimationFrame(draw);
+            }
+            draw();
+        </script>
         <script type="module" src="/src/main.jsx"></script>
     </body>
 </html>
