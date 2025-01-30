@@ -12,18 +12,18 @@ export default function HomeLayout() {
     const location = useLocation();
 
     useEffect(() => {
-        const htmlELement = document.getElementsByTagName("html")
-         
+        const htmlELement = document.getElementsByTagName("html");
+
         switch (localStorage.getItem("theme")) {
             case "light":
-                htmlELement[0].classList.remove("dark")
-                break
-                
+                htmlELement[0].classList.remove("dark");
+                break;
+
             case "dark":
-                htmlELement[0].classList.add("dark")
-                break
+                htmlELement[0].classList.add("dark");
+                break;
         }
-    }, [])
+    }, []);
 
     const themeSwitch = () => {
         const theme = localStorage.getItem("theme");
@@ -70,7 +70,7 @@ export default function HomeLayout() {
                     onClick={() => {
                         themeSwitch();
                     }}
-                    className="theme-toggler w-[25px] dark:invert transition-[filter] duration-1000"
+                    className="theme-toggler w-[25px] relative dark:invert transition-[filter] duration-1000"
                     aria-label="Switch Theme"
                 ></button>
             </header>

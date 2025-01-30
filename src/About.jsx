@@ -8,9 +8,10 @@ function About() {
 
         timeline.to(".title > *", {
             y: 0,
-            duration: .7,
+            duration: .8,
             ease: "expo.out",
             stagger: 0.03,
+            delay: .5
         });
 
         timeline.to(".title", {
