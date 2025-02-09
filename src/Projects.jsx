@@ -28,7 +28,7 @@ function Projects() {
     });
 
     return (
-        <main className="pb-5 projects font-medium">
+        <main className="pb-5 projects relative font-medium">
             <div className="title w-[100%] flex flex-col mt-5 mb-[50px]">
                 <h1 className="font-bold title text-[2em] mb-5 ">
                     {" "}

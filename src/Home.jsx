@@ -26,7 +26,7 @@ function Home() {
     })
 
     return (
-        <main className="pb-5 overflow-hidden">
+        <main className="pb-5 relative overflow-hidden">
             <article role="article">
                 <div className="flex gap-10 items-end justify-between">
                     <div className="flex flex-col gap-6">

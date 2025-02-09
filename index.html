@@ -40,7 +40,7 @@
             body {
                 overflow-x: hidden;
             }
-            </style>
+        </style>
 
         <title>JoZeito</title>
     </head>
@@ -48,17 +48,15 @@
         id="root"
         class="antialiased pt-10 bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 max-md:w-[80vw] w-[660px] transition text-sm"
     >
-
         <canvas
             class="text-block max-[500px]:hidden bg-white dark:invert fixed top-0 left-0 z-[-4] block"
             id="backgroundCanvasDesktop"
         ></canvas>
 
-
-        <div class="App" id="App"></div>
-
         <script>
-            const canvasDesktop = document.getElementById("backgroundCanvasDesktop");
+            const canvasDesktop = document.getElementById(
+                "backgroundCanvasDesktop"
+            );
             const ctxDesktop = canvasDesktop.getContext("2d");
 
             canvasDesktop.width = window.innerWidth;
@@ -70,13 +68,20 @@
             let time = 0;
 
             function draw() {
-                ctxDesktop.clearRect(0, 0, canvasDesktop.width, canvasDesktop.height);
+                ctxDesktop.clearRect(
+                    0,
+                    0,
+                    canvasDesktop.width,
+                    canvasDesktop.height
+                );
                 for (let y = 0; y < rows; y++) {
                     for (let x = 0; x < cols; x++) {
                         let xPos =
-                            x * spacing + (canvasDesktop.width - cols * spacing) / 2;
+                            x * spacing +
+                            (canvasDesktop.width - cols * spacing) / 2;
                         let yPos =
-                            y * spacing + (canvasDesktop.height - rows * spacing) / 2;
+                            y * spacing +
+                            (canvasDesktop.height - rows * spacing) / 2;
                         let offset = Math.sin((x + time) * 0.3) * 5; // Movimento de onda
                         let randomBlink = Math.random() > 0.9 ? 0 : 1; // Piscar aleatório
                         let opacity =
@@ -94,6 +99,9 @@
             }
             draw();
         </script>
+
+        <div class="App" id="App"></div>
+
         <script type="module" src="/src/main.jsx"></script>
     </body>
 </html>

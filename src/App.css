@@ -46,6 +46,15 @@ header a {
     color: inherit;
 }
 
+.mouse {
+    pointer-events: none;
+    touch-action: none;
+}
+
+.about span {
+    cursor: pointer;
+}
+
 header a:hover {
     background-color: rgba(27, 196, 230, 0.201);
     color: rgb(27, 230, 67);
@@ -89,6 +98,27 @@ hr {
     opacity: 0.5;
 }
 
+.mouse {
+    z-index: 100;
+    border: 1px solid rgba(0, 0, 0, 0.288);
+    box-shadow: 4px 0px 12px 6px #00000021;
+    pointer-events: none;
+    touch-action: none;
+    font-size: 0.8em;
+}
+
+.mouse * {
+    color: black;
+}
+
+html.dark .mouse * {
+    color: white;
+}
+
+html.dark .mouse {
+    box-shadow: 4px 0px 12px 8px #ffffff21;
+}
+
 .foto {
     pointer-events: none;
     touch-action: none;
@@ -127,10 +157,6 @@ hr {
 
 }
 
-html.dark footer li::after {
-    background-color: white;
-}
-
 li::before {
     display: inline-block;
     content: " ";
@@ -167,7 +193,6 @@ html.dark .slide-out {
 }
 
 .content main {
-    position: relative;
     z-index: 4;
 }
 

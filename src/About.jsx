@@ -1,35 +1,99 @@
 import Transition from "./Transition";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useEffect, useRef } from "react";
+import Contents from "./Contents";
 
 function About() {
+    const mouse = useRef({ x: 0, y: 0 });
+
+    const circle = useRef();
+
+    const manageMouseMove = (e) => {
+        const { clientX, clientY } = e;
+
+        mouse.current = {
+            x: clientX,
+
+            y: clientY,
+        };
+        moveCircle(mouse.current.x, mouse.current.y);
+    };
+
+    const spanMouseIn = (e) => {
+        let spanNumber = e.target.id.replace("span","")
+        gsap.to(".mouse", { width: "250px", opacity: 1, ease: "expo", duration: 1, delay: .2 });
+
+        setTimeout(() => {
+            circle.current.innerHTML = Contents(spanNumber)
+        }, 500);
+    };
+
+    const spanMouseOut = (e) => {
+        gsap.to(".mouse", { width: "0px",opacity: 0, ease: "expo", duration: 1 });
+
+        circle.current.innerHTML = ""
+    };
+
+    const moveCircle = (x, y) => {
+        gsap.to(circle.current, { x, y, xPercent: -75, yPercent: -105 });
+    };
+
+    useEffect(() => {
+        window.addEventListener("mousemove", manageMouseMove);
+
+        const spanElements = Array.from(document.querySelectorAll("span"));
+
+        spanElements.forEach((element, index) => {
+            element.id = `span${index}`
+            element.addEventListener("mouseenter", spanMouseIn);
+
+            element.addEventListener("mouseleave", spanMouseOut);
+        });
+
+        return () => {
+            window.removeEventListener("mousemove", manageMouseMove);
+
+            spanElements.forEach((element) => {
+                element.removeEventListener("mouseenter", spanMouseIn);
+
+                element.removeEventListener("mouseleave", spanMouseOut);
+            });
+        };
+    }, []);
+
     useGSAP(() => {
         const timeline = gsap.timeline();
 
         timeline.to(".title > *", {
             y: 0,
-            duration: .8,
+            duration: 0.8,
             ease: "expo.out",
             stagger: 0.03,
-            delay: .5
+            delay: 0.5,
         });
 
         timeline.to(".title", {
             y: 0,
-            duration: .5,
-            ease: "power1"
-        })
+            duration: 0.5,
+            ease: "power1",
+        });
 
         timeline.to(".text-block", {
             opacity: 1,
-            duration: .5,
+            duration: 0.5,
             ease: "power1",
-            stagger: .1
-        })
+            stagger: 0.1,
+        });
     });
 
     return (
-        <main className="pb-5 font-medium">
+        <main className="pb-5 about relative font-medium">
+            <div
+                ref={circle}
+                className="top-0 flex flex-col justify-between mouse left-0 fixed aspect-square rounded-md p-5 opacity-0 dark:bg-zinc-950 bg-white"
+            />
+
             <article>
                 <h1 className="font-bold title my-10 text-[2em]">
                     <div className="green">/</div>
@@ -61,6 +125,15 @@ function About() {
                             Estilização de páginas usando{" "}
                             <span className="green">CSS</span>.
                         </li>
+
+                        <li>
+                            Criação de scripts usando{" "}
+                            <span className="green">JavaScript</span>,{" "}
+                            <span className="green">PHP</span>,{" "}
+                            <span className="green">Python</span> e{" "}
+                            <span className="green">TypeScript</span>.
+                        </li>
+
                         <li>
                             Criação de aplicações Web usando{" "}
                             <span className="green">React</span> e{" "}
@@ -71,12 +144,12 @@ function About() {
                             <span className="green">Tailwind</span> e{" "}
                             <span className="green">Bootstrap</span>.
                         </li>
+
                         <li>
-                            Criação de scripts usando{" "}
-                            <span className="green">JavaScript</span>,{" "}
-                            <span className="green">Python</span> e{" "}
-                            <span className="green">TypeScript</span>.
+                            Gerenciamento de base de dados usando{" "}
+                            <span className="green">MySQL</span>.
                         </li>
+
                         <li>
                             Controle de versão usando{" "}
                             <span className="green">Git</span>.
@@ -140,17 +213,12 @@ function About() {
                     <hr />
                     <ul className="flex flex-col gap-2">
                         <p>
-                            Atualizado em{" "}
-                            <span className="green">Janeiro de 2025</span>.
+                            Atualizado em Janeiro de 2025.
                         </p>
 
-                        <li>
-                            Estudando gerenciamento de Base de Dados
-                            relacionais;
-                        </li>
-                        <li>Aprendendo PHP;</li>
+                        <li>Estudando Node.JS</li>
                         <li>Mexendo neste site.</li>
-                        <li>Dando voltas em Xai-Xai.</li>
+                        <li>Dando passeios em <span className="green">Xai-Xai</span>.</li>
                     </ul>
                 </div>
             </article>
