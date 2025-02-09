@@ -190,7 +190,7 @@ export default function Contents(id) {
                 />
             </div>
             <div class="contents">
-            Xai-Xai é uma cidade costeira de Moçambique, capital da província de Gaza. Conhecida por suas praias, agricultura e comércio, é um importante centro econômico e turístico na região sul do país.
+            Xai-Xai é uma cidade costeira de Moçambique, capital da província de Gaza. Conhecida por suas praias, é um importante centro econômico na região sul do país, (onde eu vivo).
             </div>
             `, 
     ];
