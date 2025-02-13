@@ -1,42 +1,68 @@
 import Transition from "./Transition";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Contents from "./Contents";
 
 function About() {
+    const [isActive, setIsActive] = useState(true);
+
     const mouse = useRef({ x: 0, y: 0 });
 
     const circle = useRef();
 
     const manageMouseMove = (e) => {
-        const { clientX, clientY } = e;
+        if (isActive) {
+            const { clientX, clientY } = e;
 
-        mouse.current = {
-            x: clientX,
+            mouse.current = {
+                x: clientX,
 
-            y: clientY,
-        };
-        moveCircle(mouse.current.x, mouse.current.y);
+                y: clientY,
+            };
+
+            mouse.current.x < 200 ? (mouse.current.x += 50) : "";
+            window.innerWidth - mouse.current.x < 200
+                ? (mouse.current.x -= 50)
+                : "";
+            moveCircle(mouse.current.x, mouse.current.y);
+        }
     };
 
     const spanMouseIn = (e) => {
-        let spanNumber = e.target.id.replace("span","")
-        gsap.to(".mouse", { width: "250px", opacity: 1, ease: "expo", duration: 1, delay: .2 });
+        let spanNumber = e.target.id.replace("span", "");
+        gsap.to(".mouse", {
+            width: "250px",
+            opacity: 1,
+            ease: "expo",
+            duration: 1,
+            delay: 0.2,
+        });
 
         setTimeout(() => {
-            circle.current.innerHTML = Contents(spanNumber)
+            circle.current.innerHTML = Contents(spanNumber);
         }, 500);
+
+        setIsActive(true);
     };
 
     const spanMouseOut = (e) => {
-        gsap.to(".mouse", { width: "0px",opacity: 0, ease: "expo", duration: 1 });
+        gsap.to(".mouse", {
+            width: "0px",
+            opacity: 0,
+            ease: "expo",
+            duration: 1,
+        });
 
-        circle.current.innerHTML = ""
+        circle.current.innerHTML = "";
+
+        setTimeout(() => {
+            setIsActive(false);
+        }, 400);
     };
 
     const moveCircle = (x, y) => {
-        gsap.to(circle.current, { x, y, xPercent: -75, yPercent: -105 });
+        gsap.to(circle.current, { x, y, xPercent: -45, yPercent: -105 });
     };
 
     useEffect(() => {
@@ -45,7 +71,7 @@ function About() {
         const spanElements = Array.from(document.querySelectorAll("span"));
 
         spanElements.forEach((element, index) => {
-            element.id = `span${index}`
+            element.id = `span${index}`;
             element.addEventListener("mouseenter", spanMouseIn);
 
             element.addEventListener("mouseleave", spanMouseOut);
@@ -60,7 +86,7 @@ function About() {
                 element.removeEventListener("mouseleave", spanMouseOut);
             });
         };
-    }, []);
+    }, [isActive, setIsActive]);
 
     useGSAP(() => {
         const timeline = gsap.timeline();
@@ -212,13 +238,14 @@ function About() {
                     </h2>
                     <hr />
                     <ul className="flex flex-col gap-2">
-                        <p>
-                            Atualizado em Janeiro de 2025.
-                        </p>
+                        <p>Atualizado em Janeiro de 2025.</p>
 
                         <li>Estudando Node.JS</li>
                         <li>Mexendo neste site.</li>
-                        <li>Dando passeios em <span className="green">Xai-Xai</span>.</li>
+                        <li>
+                            Dando passeios em{" "}
+                            <span className="green">Xai-Xai</span>.
+                        </li>
                     </ul>
                 </div>
             </article>

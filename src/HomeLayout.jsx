@@ -12,6 +12,8 @@ export default function HomeLayout() {
     const location = useLocation();
 
     useEffect(() => {
+        console.log("O quê está fazendo aqui? curioso \n Seja como for se você encontrar um bug, peculiaridade ou irregularidade, fique a vontade para me notificar no meu email: josezeito@outlook.com")
+
         const htmlELement = document.getElementsByTagName("html");
 
         switch (localStorage.getItem("theme")) {

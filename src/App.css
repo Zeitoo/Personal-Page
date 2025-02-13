@@ -52,6 +52,7 @@ header a {
 }
 
 .about span {
+    margin: 0px 6px;
     cursor: pointer;
 }
 
@@ -116,7 +117,8 @@ html.dark .mouse * {
 }
 
 html.dark .mouse {
-    box-shadow: 4px 0px 12px 8px #ffffff21;
+    border: 1px solid rgba(255, 255, 255, 0.212);
+    box-shadow: 4px 0px 12px 8px #ffffff17;
 }
 
 .foto {

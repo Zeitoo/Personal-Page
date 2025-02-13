@@ -187,10 +187,11 @@ export default function Contents(id) {
                 <img
                     style="width: 300px; border-radius: 5px;"
                     src="https://i0.wp.com/xaixai-mozambique.com/wp-content/uploads/2021/09/beach-xzzx.jpg?fit=1832%2C1374&ssl=1"
+                    alt="Uma foto da cidade de Xai-Xai (Praia de Xai-Xai)."
                 />
             </div>
             <div class="contents">
-            Xai-Xai é uma cidade costeira de Moçambique, capital da província de Gaza. Conhecida por suas praias, agricultura e comércio, é um importante centro econômico e turístico na região sul do país.
+            Xai-Xai é uma cidade costeira de Moçambique, capital da província de Gaza. Conhecida por suas praias, é um importante centro econômico na região sul do país, (onde eu vivo).
             </div>
             `, 
     ];

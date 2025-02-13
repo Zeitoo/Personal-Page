@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 
 function Home() {
 
-    useGSAP(() => {
+    useGSAP(() => { 
         const timeline = gsap.timeline({repeat: 0, repeatDelay: 0})
 
         timeline.to(".nome > *", {y: 0, duration: .5, delay: .3, ease: "expo.out", stagger: 0.03});
