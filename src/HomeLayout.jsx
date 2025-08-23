@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Home from "./Home";
 import NotFound from "./NotFound";
 import About from "./About";
-import Projects from "./Projects";
+import Jorney from "./Jorney";
 
 import { AnimatePresence } from "framer-motion";
 
@@ -12,7 +12,9 @@ export default function HomeLayout() {
     const location = useLocation();
 
     useEffect(() => {
-        console.log("O quê está fazendo aqui? curioso \n Seja como for se você encontrar um bug, peculiaridade ou irregularidade, fique a vontade para me notificar no meu email: josezeito@outlook.com")
+        console.log(
+            "O quê está fazendo aqui? curioso \n Seja como for se você encontrar um bug, peculiaridade ou irregularidade, fique a vontade para me notificar no meu email: josezeito@outlook.com"
+        );
 
         const htmlELement = document.getElementsByTagName("html");
 
@@ -60,8 +62,8 @@ export default function HomeLayout() {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink tabIndex={0} to="./projects">
-                                Projetos
+                            <NavLink tabIndex={0} to="./jorney">
+                                Jornada
                             </NavLink>
                         </li>
                     </ul>
@@ -83,7 +85,7 @@ export default function HomeLayout() {
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
 
-                        <Route path="/projects" element={<Projects />} />
+                        <Route path="/jorney" element={<Jorney />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </AnimatePresence>

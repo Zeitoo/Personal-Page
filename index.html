@@ -49,55 +49,63 @@
         class="antialiased pt-10 bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 max-md:w-[80vw] w-[660px] transition text-sm"
     >
         <canvas
-            class="text-block max-[500px]:hidden bg-white dark:invert fixed top-0 left-0 z-[-4] block"
+            class="text-block max-[500px]:hidden bg-white dark:invert fixed top-0 left-[-10px] z-[-4] block"
             id="backgroundCanvasDesktop"
         ></canvas>
 
         <script>
-            const canvasDesktop = document.getElementById(
-                "backgroundCanvasDesktop"
-            );
-            const ctxDesktop = canvasDesktop.getContext("2d");
-
-            canvasDesktop.width = window.innerWidth;
-            canvasDesktop.height = window.innerHeight;
-
-            const cols = 50; // Quantidade de colunas
-            const rows = 20; // Quantidade de linhas
-            const spacing = 30; // Espaçamento entre os pontos
-            let time = 0;
-
-            function draw() {
-                ctxDesktop.clearRect(
-                    0,
-                    0,
-                    canvasDesktop.width,
-                    canvasDesktop.height
+            if (!true) {
+                const canvasDesktop = document.getElementById(
+                    "backgroundCanvasDesktop"
                 );
-                for (let y = 0; y < rows; y++) {
-                    for (let x = 0; x < cols; x++) {
-                        let xPos =
-                            x * spacing +
-                            (canvasDesktop.width - cols * spacing) / 2;
-                        let yPos =
-                            y * spacing +
-                            (canvasDesktop.height - rows * spacing) / 2;
-                        let offset = Math.sin((x + time) * 0.3) * 5; // Movimento de onda
-                        let randomBlink = Math.random() > 0.9 ? 0 : 1; // Piscar aleatório
-                        let opacity =
-                            ((Math.sin((x + y + time) * 0.2) + 1) / 2) *
-                            randomBlink; // Efeito de piscada
+                const ctxDesktop = canvasDesktop.getContext("2d");
 
-                        ctxDesktop.fillStyle = `rgba(0, 0, 0, ${opacity})`;
-                        ctxDesktop.beginPath();
-                        ctxDesktop.arc(xPos, yPos + offset, 1, 0, Math.PI * 2); // Pontos menores
-                        ctxDesktop.fill();
+                canvasDesktop.width = window.outerWidth;
+                canvasDesktop.height = window.outerHeight;
+
+                const cols = Math.floor(window.screen.width / 17); // Quantidade de colunas
+                const rows = Math.floor(window.screen.height / 17); // Quantidade de linhas
+                const spacing = 19; // Espaçamento entre os pontos
+                let time = 0;
+
+                function draw() {
+                    ctxDesktop.clearRect(
+                        0,
+                        0,
+                        canvasDesktop.width,
+                        canvasDesktop.height
+                    );
+                    for (let y = 0; y < rows; y++) {
+                        for (let x = 0; x < cols; x++) {
+                            let xPos =
+                                x * spacing +
+                                (canvasDesktop.width - cols * spacing) / 2;
+                            let yPos =
+                                y * spacing +
+                                (canvasDesktop.height - rows * spacing) / 2;
+                            let offset = Math.sin((x + time) * 0.3) * 5; // Movimento de onda
+                            let randomBlink = Math.random() > 0.9 ? 0 : 1; // Piscar aleatório
+                            let opacity =
+                                ((Math.sin((x + y + time) * 0.2) + 1) / 2) *
+                                randomBlink; // Efeito de piscada
+
+                            ctxDesktop.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+                            ctxDesktop.beginPath();
+                            ctxDesktop.arc(
+                                xPos,
+                                yPos + offset,
+                                1,
+                                0,
+                                Math.PI * 2
+                            ); // Pontos menores
+                            ctxDesktop.fill();
+                        }
                     }
+                    time += 0.1;
+                    requestAnimationFrame(draw);
                 }
-                time += 0.1;
-                requestAnimationFrame(draw);
+                draw();
             }
-            draw();
         </script>
 
         <div class="App" id="App"></div>

@@ -6,6 +6,8 @@
 
 :root {
     --green: rgb(27, 230, 67);
+    --red: red;
+    --yellow: yellow;
 }
 
 html::-webkit-scrollbar {
@@ -76,7 +78,7 @@ header a.active {
 }
 
 .theme-toggler::after {
-    transition: opacity .5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
     width: 105px;
     opacity: 0;
     padding: 5px;
@@ -156,7 +158,6 @@ html.dark .mouse {
     transform: translateY(-200%);
     display: inline-block;
     margin: 10px 0px;
-
 }
 
 li::before {
@@ -167,6 +168,14 @@ li::before {
     width: 10px;
     aspect-ratio: 1/1;
     border: 1px solid var(--green);
+}
+
+li.red::before {
+    border: 1px solid var(--red);
+}
+
+li.yellow::before {
+    border: 1px solid var(--yellow);
 }
 
 .green {
@@ -198,35 +207,36 @@ html.dark .slide-out {
     z-index: 4;
 }
 
-main.projects .card {
-    backdrop-filter: blur(5px);
-    overflow: hidden;
-    margin: 0 auto;
+.text-block p {
+    line-height: 1.6em;
 }
 
-main.projects .card .img{
-    width: 100%;
-    transition: background-image 1s ease-in-out;
-    aspect-ratio: 16/9;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url("./projects/felipe-bird.png");
+p.text-block {
+    line-height: 1.6em;
 }
 
-main.projects .card .img:hover{
-    background-image: url("./projects/felipe-bird.gif");
-}
-
-main.projects .projects-wrapper {
-    grid-template-columns: 1fr 1fr;
-}
-
-@media screen and (max-width: 660px) {
-    main.projects .projects-wrapper {
-        align-items: center;
-        justify-content: center;
-        grid-template-columns: 1fr;
+@keyframes icone {
+    from {
+        rotate: 0deg;
+        stroke-dasharray: 7 10 6;
+    }
+    to {
+        rotate: 360deg;
+        stroke-dasharray: 35 26 20;
     }
 }
 
+svg {
+    z-index: 10;
+    stroke-linecap: round;
+    left: -5px;
+    top: -5px;
+    animation: 10s linear 0s infinite both alternate icone;
+}
+
+html.dark svg.circle {
+    stroke: white;
+}
+html svg.circle {
+    stroke: rgb(0, 0, 0);
+}

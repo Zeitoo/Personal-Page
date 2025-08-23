@@ -88,33 +88,34 @@ function About() {
         };
     }, [isActive, setIsActive]);
 
-    useGSAP(() => {
-        const timeline = gsap.timeline();
+    if (!eval(import.meta.env.VITE_DEV_MODE)) {
+        useGSAP(() => {
+            const timeline = gsap.timeline();
 
-        timeline.to(".title > *", {
-            y: 0,
-            duration: 0.8,
-            ease: "expo.out",
-            stagger: 0.03,
-            delay: 0.5,
+            timeline.to(".title > *", {
+                y: 0,
+                duration: 0.8,
+                ease: "expo.out",
+                stagger: 0.03,
+                delay: 0.5,
+            });
+
+            timeline.to(".title", {
+                y: 0,
+                duration: 0.5,
+                ease: "power1",
+            });
+
+            timeline.to(".text-block", {
+                opacity: 1,
+                duration: 0.5,
+                ease: "power1",
+                stagger: 0.1,
+            });
         });
-
-        timeline.to(".title", {
-            y: 0,
-            duration: 0.5,
-            ease: "power1",
-        });
-
-        timeline.to(".text-block", {
-            opacity: 1,
-            duration: 0.5,
-            ease: "power1",
-            stagger: 0.1,
-        });
-    });
-
+    }
     return (
-        <main className="pb-5 about relative font-medium">
+        <main className="pb-5 about text-justify relative font-medium">
             <div
                 ref={circle}
                 className="top-0 flex flex-col justify-between mouse left-0 fixed aspect-square rounded-md p-5 opacity-0 dark:bg-zinc-950 bg-white"

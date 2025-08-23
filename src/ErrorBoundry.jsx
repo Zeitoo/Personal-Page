@@ -18,8 +18,8 @@ export default function ErrorBoundry() {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink tabIndex={0} to="./projects">
-                                Projetos
+                            <NavLink tabIndex={0} to="./jorney">
+                                Jornada
                             </NavLink>
                         </li>
                     </ul>

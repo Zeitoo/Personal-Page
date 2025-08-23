@@ -4,26 +4,33 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 function Home() {
+    if (!eval(import.meta.env.VITE_DEV_MODE)) {
+        useGSAP(() => {
+            const timeline = gsap.timeline({ repeat: 0, repeatDelay: 0 });
 
-    useGSAP(() => { 
-        const timeline = gsap.timeline({repeat: 0, repeatDelay: 0})
+            timeline.to(".nome > *", {
+                y: 0,
+                duration: 0.5,
+                delay: 0.3,
+                ease: "expo.out",
+                stagger: 0.03,
+            });
 
-        timeline.to(".nome > *", {y: 0, duration: .5, delay: .3, ease: "expo.out", stagger: 0.03});
+            timeline.to(".nome", {
+                y: 0,
+                duration: 0.5,
+                ease: "power1",
+            });
 
-        timeline.to(".nome", {
-            y: 0,
-            duration: .5,
-            ease: "power1"
-        })
-
-        timeline.to(".text-block", {
-            y: 0,
-            opacity: 1,
-            duration: .5, 
-            ease: "power2.in",
-            stagger: .2,
-        })
-    })
+            timeline.to(".text-block", {
+                y: 0,
+                opacity: 1,
+                duration: 0.5,
+                ease: "power2.in",
+                stagger: 0.2,
+            });
+        });
+    }
 
     return (
         <main className="pb-5 relative overflow-hidden">
@@ -31,15 +38,46 @@ function Home() {
                 <div className="flex gap-10 items-end justify-between">
                     <div className="flex flex-col gap-6">
                         <div>
-                            <img
-                                className="w-[150px] min-[500px]:hidden foto text-block rounded-full"
-                                src={profileImg}
-                                alt="A picture of myself"
-                            />
+                            <div className="relative left-4 top-2 min-[500px]:hidden">
+                                <svg className="absolute text-block circle"
+                                    id="Component_1_1"
+                                    data-name="Component 1 – 1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="190px"
+                                    height="190px"
+                                    viewBox="0 0 62 62"
+                                >
+                                    <g
+                                        id="Ellipse_1"
+                                        data-name="Ellipse 1"
+                                        fill="#ffffff00"
+                                    >
+                                        <circle
+                                            cx="31"
+                                            cy="31"
+                                            r="31"
+                                            stroke="none"
+                                        />
+                                        <circle
+                                            cx="31"
+                                            cy="31"
+                                            r="30.5"
+                                            fill="none"
+                                        
+                                            strokeWidth="1"
+                                        />
+                                    </g>
+                                </svg>
+                                <img
+                                    className="w-[180px] min-[500px]:hidden foto text-block rounded-full"
+                                    src={profileImg}
+                                    alt="A picture of myself"
+                                />
+                            </div>
                             <div>
                                 <h1
-                                    style={{overflow: "hidden"}}
-                                    className="font-bold nome  my-3 text-[2.2em]"
+                                    style={{ overflow: "hidden" }}
+                                    className="font-bold nome mt-10 text-[2.2em]"
                                 >
                                     <span>J</span>
                                     <span>o</span>
@@ -61,18 +99,20 @@ function Home() {
                         </div>
                         <div>
                             <p className="block font-medium text-block">
-                                Olá, meu nome é José Zeito, também conhecido
-                                como Jozeito. Nos últimos dois anos, tenho me
+                                Olá, meu nome é José Zeito, também conhecido por
+                                Jozeito. Nos últimos dois anos, tenho me
                                 dedicado ao estudo do mundo da Engenharia de
                                 Software e programação.
                             </p>
                         </div>
                     </div>
-                    <img
-                        className="w-[150px] text-block max-[499px]:hidden foto rounded-lg"
-                        src={profileImg}
-                        alt="A picture of myself"
-                    />
+                    <div className="">
+                        <img
+                            className="w-[350px] text-block max-[499px]:hidden foto rounded-lg"
+                            src={profileImg}
+                            alt="A picture of myself"
+                        />
+                    </div>
                 </div>
 
                 <div className="my-10 font-medium flex flex-col gap-5">
