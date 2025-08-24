@@ -51,7 +51,7 @@ function About() {
             width: "0px",
             opacity: 0,
             ease: "expo",
-            duration: 1,
+            duration: 0.5,
         });
 
         circle.current.innerHTML = "";
@@ -66,8 +66,11 @@ function About() {
     };
 
     useEffect(() => {
+        window.addEventListener("scroll", () => {
+            spanMouseOut();
+        });
         window.addEventListener("mousemove", manageMouseMove);
-
+         
         const spanElements = Array.from(document.querySelectorAll("span"));
 
         spanElements.forEach((element, index) => {
