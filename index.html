@@ -54,17 +54,17 @@
         ></canvas>
 
         <script>
-            if (!true) {
+            if (true) {
                 const canvasDesktop = document.getElementById(
                     "backgroundCanvasDesktop"
                 );
                 const ctxDesktop = canvasDesktop.getContext("2d");
 
-                canvasDesktop.width = window.outerWidth;
-                canvasDesktop.height = window.outerHeight;
+                canvasDesktop.width = window.screen.width;
+                canvasDesktop.height = window.screen.height;
 
-                const cols = Math.floor(window.screen.width / 17); // Quantidade de colunas
-                const rows = Math.floor(window.screen.height / 17); // Quantidade de linhas
+                const cols = Math.floor(window.screen.width / 15); // Quantidade de colunas
+                const rows = Math.floor(window.screen.height / 15); // Quantidade de linhas
                 const spacing = 19; // Espaçamento entre os pontos
                 let time = 0;
 

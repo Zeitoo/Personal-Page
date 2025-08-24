@@ -129,9 +129,6 @@ html.dark .mouse {
     user-select: none;
 }
 
-.text-block {
-    opacity: 0;
-}
 
 .nome {
     translate: 0 50px;
@@ -239,4 +236,7 @@ html.dark svg.circle {
 }
 html svg.circle {
     stroke: rgb(0, 0, 0);
+}
+.text-block {
+    opacity: 0;
 }
