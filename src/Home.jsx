@@ -11,7 +11,7 @@ function Home() {
             timeline.to(".nome > *", {
                 y: 0,
                 duration: 0.5,
-                delay: 0.3,
+                delay: 1,
                 ease: "expo.out",
                 stagger: 0.03,
             });

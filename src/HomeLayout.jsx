@@ -8,8 +8,15 @@ import Jorney from "./Jorney";
 
 import { AnimatePresence } from "framer-motion";
 
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+
 export default function HomeLayout() {
     const location = useLocation();
+
+    useGSAP(() => {
+        gsap.fromTo(".header", { opacity: 0 }, { opacity: 1, duration: 1.5 });
+    });
 
     useEffect(() => {
         console.log(
@@ -48,7 +55,7 @@ export default function HomeLayout() {
 
     return (
         <>
-            <header className="my-10 flex items-center justify-between">
+            <header className="my-10 header flex items-center justify-between">
                 <nav role="navigation" aria-label="Main Navigation">
                     <ul className="flex gap-2 text-sm font-semibold">
                         <li>
