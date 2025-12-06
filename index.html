@@ -40,6 +40,66 @@
             body {
                 overflow-x: hidden;
             }
+
+            .bg-wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100vw;
+            }
+
+            .geral-bg {
+                position: relative;
+                height: 100%;
+                width: 100%;
+            }
+            .bg-wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100vw;
+                backdrop-filter: blur(30px);
+                z-index: -1;
+            }
+
+            .geral-bg {
+                z-index: -1;
+                height: 100vh;
+                width: 100vw;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .dot {
+                z-index: -1;
+                filter: blur(80px);
+                opacity: 0.4;
+                border-radius: 50%;
+                aspect-ratio: 1/1;
+                position: absolute;
+                background-color: var(--green);
+            }
+
+            html.dark .dot {
+                opacity: 0.3;
+                filter: blur(70px);
+                background-color: white;
+            }
+
+            .dot:nth-of-type(1) {
+                width: 200px;
+            }
+            .dot:nth-of-type(2) {
+                width: 100px;
+            }
+            .dot:nth-of-type(3) {
+                width: 350px;
+            }
+            .dot:nth-of-type(4) {
+                width: 150px;
+            }
         </style>
 
         <title>JoZeito</title>
@@ -48,63 +108,72 @@
         id="root"
         class="antialiased pt-10 bg-white dark:bg-black text-zinc-900 dark:text-zinc-100 max-md:w-[80vw] w-[660px] transition text-sm"
     >
-        <canvas
-            class="text-block max-[500px]:hidden bg-white dark:invert fixed top-0 left-[-10px] z-[-4] block"
-            id="backgroundCanvasDesktop"
-        ></canvas>
+        <div class="bg-wrapper">
+            <div class="geral-bg"></div>
+        </div>
 
         <script>
             if (true) {
-                const canvasDesktop = document.getElementById(
-                    "backgroundCanvasDesktop"
-                );
-                const ctxDesktop = canvasDesktop.getContext("2d");
+                const body = document.querySelector(".geral-bg");
 
-                canvasDesktop.width = window.outerWidth;
-                canvasDesktop.height = window.outerHeight;
-
-                const cols = Math.floor(window.screen.width / 15); // Quantidade de colunas
-                const rows = Math.floor(window.screen.height / 15); // Quantidade de linhas
-                const spacing = 19; // Espaçamento entre os pontos
-                let time = 0;
-
-                function draw() {
-                    ctxDesktop.clearRect(
-                        0,
-                        0,
-                        canvasDesktop.width,
-                        canvasDesktop.height
-                    );
-                    for (let y = 0; y < rows; y++) {
-                        for (let x = 0; x < cols; x++) {
-                            let xPos =
-                                x * spacing +
-                                (canvasDesktop.width - cols * spacing) / 2;
-                            let yPos =
-                                y * spacing +
-                                (canvasDesktop.height - rows * spacing) / 2;
-                            let offset = Math.sin((x + time) * 0.3) * 5; // Movimento de onda
-                            let randomBlink = Math.random() > 0.9 ? 0 : 1; // Piscar aleatório
-                            let opacity =
-                                ((Math.sin((x + y + time) * 0.2) + 1) / 2) *
-                                randomBlink; // Efeito de piscada
-
-                            ctxDesktop.fillStyle = `rgba(0, 0, 0, ${opacity})`;
-                            ctxDesktop.beginPath();
-                            ctxDesktop.arc(
-                                xPos,
-                                yPos + offset,
-                                1,
-                                0,
-                                Math.PI * 2
-                            ); // Pontos menores
-                            ctxDesktop.fill();
-                        }
-                    }
-                    time += 0.1;
-                    requestAnimationFrame(draw);
+                // Criação dos dots
+                for (let i = 0; i < 4; i++) {
+                    const newDot = document.createElement("div");
+                    newDot.style.width = Math.random() * 200 + 100 + "px";
+                    newDot.classList.add("dot");
+                    body.appendChild(newDot);
                 }
-                draw();
+
+                // Variáveis de viewport (evita calcular toda hora — muita performance!)
+                let vw = window.innerWidth;
+                let vh = window.innerHeight;
+
+                window.addEventListener("resize", () => {
+                    vw = window.innerWidth;
+                    vh = window.innerHeight;
+                });
+
+                // Função de animação mais leve
+                function animateDot(dot) {
+                    // posição inicial
+                    if (!dot.dataset.init) {
+                        dot.style.left = Math.random() * (vw - 50) + "px";
+                        dot.style.top = Math.random() * (vh - 50) + "px";
+                        dot.dataset.init = "true";
+                    }
+
+                    const startLeft = dot.style.left;
+                    const startTop = dot.style.top;
+
+                    const endLeft = Math.random() * (vw - 50) + "px";
+                    const endTop = Math.random() * (vh - 50) + "px";
+
+                    // animação via Web Animations (já é leve)
+                    const animation = dot.animate(
+                        [
+                            { left: startLeft, top: startTop },
+                            { left: endLeft, top: endTop },
+                        ],
+                        {
+                            duration: 3000 + Math.random() * 2000,
+                            easing: "ease-in-out",
+                            fill: "both",
+                        }
+                    );
+
+                    // O truque que deixa mais leve: requestAnimationFrame ao invés de setTimeout
+                    animation.finished.then(() => {
+                        dot.style.left = endLeft;
+                        dot.style.top = endTop;
+
+                        requestAnimationFrame(() => animateDot(dot));
+                    });
+                }
+
+                const dots = document.querySelectorAll(".dot");
+                dots.forEach((dot, i) => {
+                    setTimeout(() => animateDot(dot), i * 500);
+                });
             }
         </script>
 

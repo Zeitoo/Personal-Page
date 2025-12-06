@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            body {
+                position: relative;
+                height: 100vh;
+                width: 100vw;
+                background-color: black;
+            }
+
+            .dot {
+                position: absolute;
+                width: 30px;
+                aspect-ratio: 1/1;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body></body>
+
+    <script>
+        const body = document.querySelector("body");
+
+        console.log("s");
+        for (let i = 0; i < 6; i++) {
+            const newDot = document.createElement("div");
+            newDot.style.width = Math.random() * 200 + 100
+            newDot.classList.add("dot");
+            body.appendChild(newDot);
+        }
+
+        function animateDot(dot) {
+            // Garantir que o dot tem uma posição inicial
+            if (!dot.style.left || !dot.style.top) {
+                dot.style.left =
+                    Math.random() * (window.innerWidth - 50) + "px";
+                dot.style.top =
+                    Math.random() * (window.innerHeight - 50) + "px";
+            }
+
+            const randomLeft = Math.random() * (window.innerWidth - 50);
+            const randomTop = Math.random() * (window.innerHeight - 50);
+            
+
+            // Criar uma nova animação simples
+            const animation = dot.animate(
+                [
+                    {
+                        left: dot.style.left,
+                        top: dot.style.top,
+                        offset: 0,
+                    },
+                    {
+                        left: randomLeft + "px",
+                        top: randomTop + "px",
+                        offset: 1,
+                    },
+                ],
+                {
+                    duration: Math.random() * 2000 + 3000,
+                    easing: "ease-in-out",
+                    fill: "both", 
+                }
+            );
+
+            animation.finished.then(() => {
+               
+                dot.style.left = randomLeft + "px";
+                dot.style.top = randomTop + "px";
+
+                setTimeout(() => animateDot(dot), 300);
+            });
+        }
+
+        // Inicializar os dots
+        const dots = document.querySelectorAll(".dot");
+        dots.forEach((dot, index) => {
+            // Delay inicial diferente para cada dot
+            setTimeout(() => animateDot(dot), index * 200);
+        });
+    </script>
+</html>

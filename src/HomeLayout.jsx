@@ -10,6 +10,8 @@ import { AnimatePresence } from "framer-motion";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Notes from "./notes";
+import NotesViewer from "./notesViewer";
 
 export default function HomeLayout() {
     const location = useLocation();
@@ -73,6 +75,11 @@ export default function HomeLayout() {
                                 Jornada
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink tabIndex={0} to="./notes">
+                                Notas
+                            </NavLink>
+                        </li>
                     </ul>
                 </nav>
 
@@ -93,6 +100,8 @@ export default function HomeLayout() {
                         <Route path="/about" element={<About />} />
 
                         <Route path="/jorney" element={<Jorney />} />
+                        <Route path="/notes" element={<Notes />}></Route>
+                        <Route path="notes/:id" element={<NotesViewer />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </AnimatePresence>
