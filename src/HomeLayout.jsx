@@ -10,7 +10,7 @@ import { AnimatePresence } from "framer-motion";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import Notes from "./notes";
+import Notes from "./Notes";
 import NotesViewer from "./notesViewer";
 
 export default function HomeLayout() {
