@@ -75,11 +75,6 @@ export default function HomeLayout() {
                                 Jornada
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink tabIndex={0} to="./notes">
-                                Notas
-                            </NavLink>
-                        </li>
                     </ul>
                 </nav>
 
