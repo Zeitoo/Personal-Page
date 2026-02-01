@@ -1,6 +1,7 @@
 import Transition from "./Transition";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import {NavLink} from "react-router-dom";
 
 function NotFound() {
 
@@ -43,7 +44,7 @@ function NotFound() {
 
             <p className="my-5 text-block flex gap-[1em]">
                 A página que você está procura não exite. Tente verificar a sua
-                URL ou <a href="./">volte para o inicio</a>
+                URL ou <NavLink to="./">volte para o inicio</NavLink>
             </p>
         </>
     );
