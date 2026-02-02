@@ -1,5 +1,4 @@
 import profileImg from "/profile.jpg";
-import Transition from "./Transition";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -141,4 +140,4 @@ function Home() {
     );
 }
 
-export default Transition(Home);
+export default Home;

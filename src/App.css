@@ -179,27 +179,6 @@ li.yellow::before {
     color: var(--green);
 }
 
-.slide-in,
-.slide-out {
-    --bg: white;
-    pointer-events: none;
-    touch-action: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    width: 100vw;
-    height: 100vh;
-    scale: 1.5;
-    background-color: var(--bg);
-    z-index: 100;
-}
-
-html.dark .slide-in,
-html.dark .slide-out {
-    --bg: black;
-}
-
 .content main {
     z-index: 4;
 }

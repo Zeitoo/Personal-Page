@@ -6,12 +6,9 @@ import NotFound from "./NotFound";
 import About from "./About";
 import Jorney from "./Jorney";
 
-import { AnimatePresence } from "framer-motion";
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import Notes from "./Notes";
-import NotesViewer from "./notesViewer";
 
 export default function HomeLayout() {
     const location = useLocation();
@@ -89,7 +86,7 @@ export default function HomeLayout() {
             </header>
 
             <div className="content my-10 ">
-                <AnimatePresence mode="wait">
+
                     <Routes location={location} key={location.pathname}>
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
@@ -99,7 +96,6 @@ export default function HomeLayout() {
                         <Route path="notes/:id" element={<NotesViewer />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
-                </AnimatePresence>
             </div>
         </>
     );
