@@ -1,4 +1,3 @@
-import Transition from "./Transition";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -20,12 +19,6 @@ function Jorney() {
                 ease: "power1",
             });
 
-            timeline.to(".text-block", {
-                opacity: 1,
-                duration: 0.5,
-                ease: "power1",
-                stagger: 0.3,
-            });
         });
     }
 
@@ -167,18 +160,18 @@ function Jorney() {
                     <div>d</div>
                     <div>a</div>
                 </h1>
-                <p className="text-block">
+                <p className="text-block text-block-0">
                     Minha jornada "estudantil" como programador desde 2022:
                 </p>
 
-                <ul className="m-3 mb-0 text-block flex flex-col gap-1">
+                <ul className="m-3 mb-0 text-block text-block-1 flex flex-col gap-1">
                     <li>Verde significa "finalizado";</li>
                     <li className="yellow">Amarelo significa "em curso";</li>
                     <li className="red">Vermelho significa "pendente";</li>
                 </ul>
             </div>
 
-            <div className="text-block">
+            <div className="text-block text-block-2">
                 <section className="pl-6">
                     <div className="relative left-[-15px] border-l max-w-3xl mx-auto">
                         {roadmap.map((step, i) => (
@@ -196,7 +189,7 @@ function Jorney() {
                                     {step.topics.map((topic, j) => (
                                         <div
                                             key={j}
-                                            className={`sm:p-2 text-block max-sm:w-[72vw]`}
+                                            className={`sm:p-2 text-block text-block-${j} max-sm:w-[72vw]`}
                                         >
                                             <div>
                                                 <div

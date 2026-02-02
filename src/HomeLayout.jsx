@@ -92,8 +92,6 @@ export default function HomeLayout() {
                         <Route path="/about" element={<About />} />
 
                         <Route path="/jorney" element={<Jorney />} />
-                        <Route path="/notes" element={<Notes />}></Route>
-                        <Route path="notes/:id" element={<NotesViewer />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
             </div>

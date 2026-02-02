@@ -1,4 +1,3 @@
-import Transition from "./Transition";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useState, useEffect, useRef } from "react";
@@ -70,7 +69,7 @@ function About() {
             spanMouseOut();
         });
         window.addEventListener("mousemove", manageMouseMove);
-         
+
         const spanElements = Array.from(document.querySelectorAll("span"));
 
         spanElements.forEach((element, index) => {
@@ -108,13 +107,6 @@ function About() {
                 duration: 0.5,
                 ease: "power1",
             });
-
-            timeline.to(".text-block", {
-                opacity: 1,
-                duration: 0.5,
-                ease: "power1",
-                stagger: 0.1,
-            });
         });
     }
     return (
@@ -138,7 +130,7 @@ function About() {
                     <div>m</div>
                 </h1>
                 <div className="text-content">
-                    <p className="block my-5 text-block">
+                    <p className="block my-5 text-block-0 text-block">
                         Olá, meu nome é José Zeito, também conhecido como
                         Jozeito. Nos últimos dois anos, tenho me dedicado ao
                         estudo do mundo da Engenharia de Software e programação,
@@ -146,7 +138,7 @@ function About() {
                         avançados como:
                     </p>
 
-                    <ul className="ms-10 text-block my-5 flex flex-col gap-2">
+                    <ul className="ms-10 text-block text-block-1 my-5 flex flex-col gap-2">
                         <li>
                             Criação de páginas usando{" "}
                             <span className="green">HTML</span>.
@@ -186,14 +178,14 @@ function About() {
                         </li>
                     </ul>
 
-                    <p className="my-5 text-block">
+                    <p className="my-5 text-block text-block-2">
                         Ao longo da minha jornada como desenvolvedor Front-end,
                         mergulhei de cabeça na arte da codificação, aprimorando
                         constantemente minhas habilidades em HTML, CSS e
                         JavaScript.
                     </p>
 
-                    <p className="my-5 text-block">
+                    <p className="my-5 text-block text-block-3">
                         Estou entusiasmado para compartilhar algumas das minhas
                         criações mais recentes. Se você procura um desenvolvedor
                         Front-end dedicado e criativo para colaborar em seu
@@ -203,7 +195,7 @@ function About() {
                     </p>
                 </div>
 
-                <div className="text-block my-10 flex flex-col gap-5">
+                <div className="text-block text-block-4 my-10 flex flex-col gap-5">
                     <h2 className="text-[1.8em] font-semibold">Contato</h2>
                     <hr />
                     <ul className="flex flex-col gap-2">
@@ -236,7 +228,7 @@ function About() {
                     </ul>
                 </div>
 
-                <div className="text-block my-10 flex flex-col gap-5">
+                <div className="text-block text-block-5 my-10 flex flex-col gap-5">
                     <h2 className="text-[1.8em] font-semibold">
                         O que estou fazendo agora
                     </h2>
@@ -257,4 +249,4 @@ function About() {
     );
 }
 
-export default Transition(About);
+export default About;

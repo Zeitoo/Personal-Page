@@ -20,14 +20,6 @@ function Home() {
                 duration: 0.5,
                 ease: "power1",
             });
-
-            timeline.to(".text-block", {
-                y: 0,
-                opacity: 1,
-                duration: 0.5,
-                ease: "power2.in",
-                stagger: 0.2,
-            });
         });
     }
 
@@ -38,7 +30,8 @@ function Home() {
                     <div className="flex flex-col gap-6">
                         <div>
                             <div className="relative left-4 top-2 min-[500px]:hidden">
-                                <svg className="absolute text-block circle"
+                                <svg
+                                    className="absolute text-block text-block-1 circle"
                                     id="Component_1_1"
                                     data-name="Component 1 – 1"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -62,13 +55,12 @@ function Home() {
                                             cy="31"
                                             r="30.5"
                                             fill="none"
-                                        
                                             strokeWidth="1"
                                         />
                                     </g>
                                 </svg>
                                 <img
-                                    className="w-[180px] min-[500px]:hidden foto text-block rounded-full"
+                                    className="w-[180px] min-[500px]:hidden text-block-2 foto text-block rounded-full"
                                     src={profileImg}
                                     alt="A picture of myself"
                                 />
@@ -91,13 +83,13 @@ function Home() {
                                     <span>v</span>
                                 </h1>
 
-                                <h2 className="font-bold green text-[1.2em] text-block">
+                                <h2 className="font-bold green text-[1.2em] text-block text-block-0">
                                     Front-end developer.
                                 </h2>
                             </div>
                         </div>
                         <div>
-                            <p className="block font-medium text-block">
+                            <p className="block font-medium text-block text-block-1">
                                 Olá, meu nome é José Zeito, também conhecido por
                                 Jozeito. Nos últimos dois anos, tenho me
                                 dedicado ao estudo do mundo da Engenharia de
@@ -107,7 +99,7 @@ function Home() {
                     </div>
                     <div className="">
                         <img
-                            className="w-[350px] text-block max-[499px]:hidden foto rounded-lg"
+                            className="w-[350px] text-block-2 text-block max-[499px]:hidden foto rounded-lg"
                             src={profileImg}
                             alt="A picture of myself"
                         />
@@ -115,7 +107,7 @@ function Home() {
                 </div>
 
                 <div className="my-10 font-medium flex flex-col gap-5">
-                    <p className="block text-block">
+                    <p className="block text-block  text-block-3">
                         Por mais de dois anos, tenho estudado o mundo da
                         Engenharia de Software mais concretamente Front-end
                         Development, estou comprometido em transformar conceitos
@@ -123,7 +115,7 @@ function Home() {
                         impressionante com funcionalidades robustas.
                     </p>
 
-                    <p className="block text-block">
+                    <p className="block text-block  text-block-4">
                         Como desenvolvedor frontend, possuo sólida experiência
                         em HTML, CSS e JavaScript, bem como em frameworks
                         modernos como React, Vue.js e Angular. Garanto layouts

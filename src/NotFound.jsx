@@ -1,4 +1,3 @@
-import Transition from "./Transition";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import {NavLink} from "react-router-dom";
@@ -16,13 +15,6 @@ function NotFound() {
             ease: "power1"
         })
 
-        timeline.to(".text-block", {
-            y: 0,
-            opacity: 1,
-            duration: .5, 
-            ease: "power2.in",
-            stagger: .2,
-        })
     })
 
     return (
@@ -50,4 +42,4 @@ function NotFound() {
     );
 }
 
-export default Transition(NotFound);
+export default NotFound;

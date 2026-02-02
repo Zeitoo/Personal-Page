@@ -216,9 +216,6 @@ html.dark svg.circle {
 html svg.circle {
     stroke: rgb(0, 0, 0);
 }
-.text-block {
-    opacity: 0;
-}
 
 .search {
     top: 50%;
@@ -248,4 +245,74 @@ html.dark .search-input {
 
 .content-block {
     background-color: rgba(255, 255, 255, 0.033);
+}
+
+@keyframes appear {
+    to {
+        opacity: 1;
+    }
+}
+
+.text-block {
+    opacity: 0;
+    animation-name: appear;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.text-block-0 {
+    animation-delay: 2s;
+}
+
+.text-block-1 {
+    animation-delay: 2.2s;
+}
+
+.text-block-2 {
+    animation-delay: 2.8s;
+}
+
+.text-block-3 {
+    animation-delay: 3s;
+}
+
+.text-block-4 {
+    animation-delay: 3.3s;
+}
+
+.text-block-5 {
+    animation-delay: 3.7s;
+}
+
+.text-block-6 {
+    animation-delay: 3.9s;
+}
+
+.text-block-7 {
+    animation-delay: 4s;
+}
+
+.text-block-8 {
+    animation-delay: 4.4s;
+}
+
+.text-block-9 {
+    animation-delay: 4.6s;
+}
+
+.text-block-10 {
+    animation-delay: 4.8s;
+}
+
+.text-block-11 {
+    animation-delay: 5s;
+}
+
+.text-block-12 {
+    animation-delay: 5.2s;
+}
+
+.text-block-13 {
+    animation-delay: 5.5s;
 }
