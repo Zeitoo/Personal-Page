@@ -3,25 +3,25 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 function Home() {
-    if (!eval(import.meta.env.VITE_DEV_MODE)) {
-        useGSAP(() => {
-            const timeline = gsap.timeline({ repeat: 0, repeatDelay: 0 });
+    useGSAP(() => {
+        if (eval(import.meta.env.VITE_DEV_MODE)) return;
 
-            timeline.to(".nome > *", {
-                y: 0,
-                duration: 0.5,
-                delay: 1,
-                ease: "expo.out",
-                stagger: 0.03,
-            });
+        const timeline = gsap.timeline({ repeat: 0, repeatDelay: 0 });
 
-            timeline.to(".nome", {
-                y: 0,
-                duration: 0.5,
-                ease: "power1",
-            });
+        timeline.to(".nome > *", {
+            y: 0,
+            duration: 0.5,
+            delay: 1,
+            ease: "expo.out",
+            stagger: 0.03,
         });
-    }
+
+        timeline.to(".nome", {
+            y: 0,
+            duration: 0.5,
+            ease: "power1",
+        });
+    });
 
     return (
         <main className="pb-5 relative overflow-hidden">

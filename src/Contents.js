@@ -1,11 +1,11 @@
 export default function Contents(id) {
     const content = [
-            //HTML  
-            `
+        //HTML  
+        `
             <div class="figure">
                 <img
                     style="width: 65px; translate: -5px 10px;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png"
+                    src="/HTML Logo - Colored - zonalogo.com.svg"
                     alt="HTML logo"
                 />
             </div>
@@ -14,13 +14,13 @@ export default function Contents(id) {
                 de páginas da web. Ele organiza elementos como textos, imagens,
                 links e vídeos, definindo a estrutura da página.
             </div>
-            `, 
-            //CSS 
-            `
+            `,
+        //CSS 
+        `
             <div class="figure">
                 <img
                     style="translate: 5px 0px;width: 55px;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/800px-CSS3_logo_and_wordmark.svg.png"
+                    src="/Tailwind_CSS_Logo.svg.webp"
                     alt="CSS logo"
                 />
             </div>
@@ -30,13 +30,13 @@ export default function Contents(id) {
                 outros aspectos visuais, separando o conteúdo (HTML) da
                 apresentação.
             </div>
-            `, 
-            //Javascript 
-            `
+            `,
+        //Javascript 
+        `
             <div class="figure">
                 <img
                     style="width: 65px;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg"
+                    src="/Unofficial_JavaScript_logo_2.svg.webp"
                     alt="Javascript logo"
                 />
             </div>
@@ -46,13 +46,13 @@ export default function Contents(id) {
                 dinâmicas como animações, validações e atualizações de conteúdo
                 sem recarregar a página.
             </div>
-            `, 
-            //PHP 
-            `
+            `,
+        //PHP 
+        `
             <div class="figure">
                 <img
                     style="width: 90px;"
-                    src="https://www.php.net/images/logos/new-php-logo.svg"
+                    src="/PHP-logo.svg.webp"
                     alt="PHP logo"
                 />
             </div>
@@ -62,13 +62,13 @@ export default function Contents(id) {
                 interagir com bancos de dados e processar formulários. É fácil
                 de aprender e amplamente utilizada.
             </div>
-            `, 
-            //Python 
-            `
+            `,
+        //Python 
+        `
             <div class="figure">
                 <img
                 style="width: 75px; translate: 0px 5px;"
-                    src="https://img.icons8.com/?size=100&id=13441&format=png&color=000000"
+                    src="/Python-logo-notext.svg.webp"
                     alt="Python logo"
                 />
             </div>
@@ -78,13 +78,13 @@ export default function Contents(id) {
                 clara e legibilidade, amplamente usada em desenvolvimento web,
                 ciência de dados, automação e IA.
             </div>
-            `, 
-            //Typescript 
-            `
+            `,
+        //Typescript 
+        `
             <div class="figure">
                 <img
                     style="width: 80px;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Typescript.svg/800px-Typescript.svg.png"
+                    src="/Typescript_logo_2020.svg.webp"
                     alt="Typescript logo"
                 />
             </div>
@@ -94,11 +94,11 @@ export default function Contents(id) {
                 manutenção do código em projetos grandes.
             </div>
             `, //REACT 
-            `
+        `
             <div class="figure">
                 <img
                     style="width: 75px; translate: 0px 10px;"
-                    src="//upload.wikimedia.org/wikipedia/commons/thumb/3/30/React_Logo_SVG.svg/512px-React_Logo_SVG.svg.png"
+                    src="/React-icon.svg.webp"
                     alt="React logo"
                 />
             </div>
@@ -109,11 +109,11 @@ export default function Contents(id) {
                 os dados mudam.
             </div>
             `, //Angular 
-            `
+        `
             <div class="figure">
                 <img
                     style="width: 125px; translate: 0px 10px;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Angular_Logo_SVG.svg/1920px-Angular_Logo_SVG.svg.png"
+                    src="/Angular_Logo.svg.webp"
                     alt="Angular logo"
                 />
             </div>
@@ -124,11 +124,11 @@ export default function Contents(id) {
                 data binding, diretivas e injeção de dependência.
             </div>
             `, //Tailwind
-            `
+        `
             <div class="figure">
                 <img
                     style="width: 100px; translate: 10px 10px;"
-                    src="https://static-00.iconduck.com/assets.00/tailwind-css-icon-512x307-1v56l8ed.png"
+                    src="/Tailwind_CSS_Logo.svg.webp"
                     alt="Tailwind logo"
                 />
             </div>
@@ -138,11 +138,11 @@ export default function Contents(id) {
                 pré-definidas para estilização rápida e responsiva.
             </div>
             `, //Bootstrap
-            `
+        `
             <div class="figure">
                 <img
                     style="width: 80px; translate: 0 10px;"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/800px-Bootstrap_logo.svg.png"
+                    src="/Bootstrap_logo.svg.webp"
                     alt="Bootstrap logo"
                 />
             </div>
@@ -151,13 +151,13 @@ export default function Contents(id) {
                 sites responsivos e modernos, com componentes pré-estilizados e
                 um sistema de grid para layouts flexíveis.
             </div>
-            `, 
-            //MySQL
-            `
+            `,
+        //MySQL
+        `
             <div class="figure">
                 <img
                     style="width: 90px;"
-                    src="https://www.mysql.com/common/logos/logo-mysql-170x115.png"
+                    src="/Mysql.svg.webp"
                     alt="MySQL logo"
                 />
             </div>
@@ -167,11 +167,11 @@ export default function Contents(id) {
                 dados de forma eficiente em aplicações web e outros softwares.
             </div>
             `, //GIT
-            `
+        `
             <div class="figure">
                 <img
                     style="width: 75px;"
-                    src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.svg"
+                    src="/Git-logo.svg.webp"
                     alt="GIT logo"
                 />
             </div>
@@ -181,8 +181,8 @@ export default function Contents(id) {
                 projetos de software e gerenciar diferentes versões do
                 código-fonte.
             </div>
-            `, 
-            `
+            `,
+        `
             <div class="figure">
                 <img
                     style="width: 300px; border-radius: 5px;"
@@ -193,7 +193,7 @@ export default function Contents(id) {
             <div class="contents">
             Xai-Xai é uma cidade costeira de Moçambique, capital da província de Gaza. Conhecida por suas praias, é um importante centro econômico na região sul do país, (onde eu vivo).
             </div>
-            `, 
+            `,
     ];
     return content[id];
 }

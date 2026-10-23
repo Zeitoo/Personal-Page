@@ -1,35 +1,62 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Contents from "./Contents";
 
 function About() {
-    const [isActive, setIsActive] = useState(true);
-
-    const mouse = useRef({ x: 0, y: 0 });
-
     const circle = useRef();
+    const isActiveRef = useRef(true);
+    const isOpenRef = useRef(false);
+    const contentTimer = useRef();
+    const hideTimer = useRef();
+    const xTo = useRef();
+    const yTo = useRef();
+
+    useGSAP(() => {
+        if (eval(import.meta.env.VITE_DEV_MODE)) return;
+
+        const timeline = gsap.timeline();
+
+        timeline.to(".title > *", {
+            y: 0,
+            duration: 0.8,
+            ease: "expo.out",
+            stagger: 0.03,
+            delay: 0.5,
+        });
+
+        timeline.to(".title", {
+            y: 0,
+            duration: 0.5,
+            ease: "power1",
+        });
+
+        // quickTo é ~10x mais leve que gsap.to por evento mousemove.
+        gsap.set(circle.current, { xPercent: -45, yPercent: -105 });
+        xTo.current = gsap.quickTo(circle.current, "x", { duration: 0.5 });
+        yTo.current = gsap.quickTo(circle.current, "y", { duration: 0.5 });
+    });
 
     const manageMouseMove = (e) => {
-        if (isActive) {
-            const { clientX, clientY } = e;
+        if (!isActiveRef.current) return;
 
-            mouse.current = {
-                x: clientX,
+        let { clientX, clientY } = e;
 
-                y: clientY,
-            };
+        if (clientX < 200) clientX += 50;
+        if (window.innerWidth - clientX < 200) clientX -= 50;
 
-            mouse.current.x < 200 ? (mouse.current.x += 50) : "";
-            window.innerWidth - mouse.current.x < 200
-                ? (mouse.current.x -= 50)
-                : "";
-            moveCircle(mouse.current.x, mouse.current.y);
-        }
+        xTo.current?.(clientX);
+        yTo.current?.(clientY);
     };
 
     const spanMouseIn = (e) => {
-        let spanNumber = e.target.id.replace("span", "");
+        clearTimeout(contentTimer.current);
+        clearTimeout(hideTimer.current);
+        isActiveRef.current = true;
+        isOpenRef.current = true;
+
+        const spanNumber = e.target.id.replace("span", "");
+
         gsap.to(".mouse", {
             width: "250px",
             opacity: 1,
@@ -38,14 +65,15 @@ function About() {
             delay: 0.2,
         });
 
-        setTimeout(() => {
-            circle.current.innerHTML = Contents(spanNumber);
+        contentTimer.current = setTimeout(() => {
+            if (circle.current) circle.current.innerHTML = Contents(spanNumber);
         }, 500);
-
-        setIsActive(true);
     };
 
-    const spanMouseOut = (e) => {
+    const spanMouseOut = () => {
+        isOpenRef.current = false;
+        clearTimeout(contentTimer.current);
+
         gsap.to(".mouse", {
             width: "0px",
             opacity: 0,
@@ -53,62 +81,45 @@ function About() {
             duration: 0.5,
         });
 
-        circle.current.innerHTML = "";
+        if (circle.current) circle.current.innerHTML = "";
 
-        setTimeout(() => {
-            setIsActive(false);
+        clearTimeout(hideTimer.current);
+        hideTimer.current = setTimeout(() => {
+            isActiveRef.current = false;
         }, 400);
     };
 
-    const moveCircle = (x, y) => {
-        gsap.to(circle.current, { x, y, xPercent: -45, yPercent: -105 });
-    };
-
     useEffect(() => {
-        window.addEventListener("scroll", () => {
-            spanMouseOut();
-        });
-        window.addEventListener("mousemove", manageMouseMove);
+        const handleScroll = () => {
+            // só fecha quando há algo aberto — antes disparava em cada pixel de scroll
+            if (isOpenRef.current) spanMouseOut();
+        };
 
-        const spanElements = Array.from(document.querySelectorAll("span"));
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("mousemove", manageMouseMove, { passive: true });
+
+        const spanElements = Array.from(
+            document.querySelectorAll(".about span")
+        );
 
         spanElements.forEach((element, index) => {
             element.id = `span${index}`;
             element.addEventListener("mouseenter", spanMouseIn);
-
             element.addEventListener("mouseleave", spanMouseOut);
         });
 
         return () => {
+            window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("mousemove", manageMouseMove);
-
             spanElements.forEach((element) => {
                 element.removeEventListener("mouseenter", spanMouseIn);
-
                 element.removeEventListener("mouseleave", spanMouseOut);
             });
+            clearTimeout(contentTimer.current);
+            clearTimeout(hideTimer.current);
         };
-    }, [isActive, setIsActive]);
+    }, []);
 
-    if (!eval(import.meta.env.VITE_DEV_MODE)) {
-        useGSAP(() => {
-            const timeline = gsap.timeline();
-
-            timeline.to(".title > *", {
-                y: 0,
-                duration: 0.8,
-                ease: "expo.out",
-                stagger: 0.03,
-                delay: 0.5,
-            });
-
-            timeline.to(".title", {
-                y: 0,
-                duration: 0.5,
-                ease: "power1",
-            });
-        });
-    }
     return (
         <main className="pb-5 about text-justify relative font-medium">
             <div

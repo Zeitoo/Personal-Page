@@ -1,11 +1,10 @@
 import { NavLink, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import Home from "./Home";
 import NotFound from "./NotFound";
 import About from "./About";
 import Jorney from "./Jorney";
-
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -40,17 +39,11 @@ export default function HomeLayout() {
         if (theme === "dark") {
             document.documentElement.classList.remove("dark");
             localStorage.setItem("theme", "light");
-            SetDarkMode(!darkMode);
         } else {
             document.documentElement.classList.add("dark");
             localStorage.setItem("theme", "dark");
-            SetDarkMode(!darkMode);
         }
     };
-
-    const [darkMode, SetDarkMode] = useState(
-        localStorage.getItem("theme") === "dark"
-    );
 
     return (
         <>
@@ -77,23 +70,20 @@ export default function HomeLayout() {
 
                 <button
                     tabIndex={0}
-                    onClick={() => {
-                        themeSwitch();
-                    }}
+                    onClick={themeSwitch}
                     className="theme-toggler w-[25px] relative dark:invert transition-[filter] duration-1000"
                     aria-label="Switch Theme"
                 ></button>
             </header>
 
             <div className="content my-10 ">
+                <Routes location={location} key={location.pathname}>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about" element={<About />} />
 
-                    <Routes location={location} key={location.pathname}>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/about" element={<About />} />
-
-                        <Route path="/jorney" element={<Jorney />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
+                    <Route path="/jorney" element={<Jorney />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
             </div>
         </>
     );

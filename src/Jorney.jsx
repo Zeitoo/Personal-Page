@@ -2,25 +2,24 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 function Jorney() {
-    if (!eval(import.meta.env.VITE_DEV_MODE)) {
-        useGSAP(() => {
-            const timeline = gsap.timeline();
+    useGSAP(() => {
+        if (eval(import.meta.env.VITE_DEV_MODE)) return;
 
-            timeline.to(".title > *", {
-                y: 0,
-                duration: 1,
-                ease: "expo.out",
-                stagger: 0.03,
-            });
+        const timeline = gsap.timeline();
 
-            timeline.to(".title", {
-                y: 0,
-                duration: 0.3,
-                ease: "power1",
-            });
-
+        timeline.to(".title > *", {
+            y: 0,
+            duration: 1,
+            ease: "expo.out",
+            stagger: 0.03,
         });
-    }
+
+        timeline.to(".title", {
+            y: 0,
+            duration: 0.3,
+            ease: "power1",
+        });
+    });
 
     const roadmap = [
         {
@@ -176,15 +175,12 @@ function Jorney() {
                     <div className="relative left-[-15px] border-l max-w-3xl mx-auto">
                         {roadmap.map((step, i) => (
                             <div key={i} className="mb-10 ml-6">
-                                {/* Timeline dot */}
                                 <div className="absolute w-4 h-4 bg-black dark:bg-white rounded-full -left-2"></div>
 
-                                {/* Phase */}
                                 <time className="mb-2 text-lg green font-semibold leading-none ">
                                     {step.phase}
                                 </time>
 
-                                {/* Topics */}
                                 <div className="space-y-4 mt-3">
                                     {step.topics.map((topic, j) => (
                                         <div

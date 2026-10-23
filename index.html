@@ -61,14 +61,12 @@
                 left: 0;
                 height: 100vh;
                 width: 100vw;
-                backdrop-filter: blur(30px);
                 z-index: -1;
                 animation-duration: 2s;
                 animation-timing-function: ease-in-out;
                 animation-name: background;
                 animation-delay: 3s;
                 animation-fill-mode: forwards;
-
             }
 
             .geral-bg {
@@ -86,7 +84,10 @@
                 border-radius: 50%;
                 aspect-ratio: 1/1;
                 position: absolute;
+                top: 0;
+                left: 0;
                 background-color: var(--green);
+                will-change: transform;
             }
 
             html.dark .dot {
@@ -122,9 +123,8 @@
         <script>
             if (true) {
                 const body = document.querySelector(".geral-bg");
-                const dotsNumber = window.innerWidth < 1000 ? 1 : 3;
+                const dotsNumber = 2;
 
-                // Criação dos dots
                 for (let i = 0; i < dotsNumber; i++) {
                     const newDot = document.createElement("div");
                     newDot.style.width = Math.random() * 200 + 100 + "px";
@@ -132,7 +132,6 @@
                     body.appendChild(newDot);
                 }
 
-                // Variáveis de viewport (evita calcular toda hora — muita performance!)
                 let vw = window.innerWidth;
                 let vh = window.innerHeight;
 
@@ -141,26 +140,30 @@
                     vh = window.innerHeight;
                 });
 
-                // Função de animação mais leve
+                // Anima transform (compositor) em vez de left/top (layout a cada frame).
                 function animateDot(dot) {
-                    // posição inicial
                     if (!dot.dataset.init) {
-                        dot.style.left = Math.random() * (vw - 50) + "px";
-                        dot.style.top = Math.random() * (vh - 50) + "px";
+                        const x = Math.random() * (vw - 50);
+                        const y = Math.random() * (vh - 50);
+                        dot.dataset.x = x;
+                        dot.dataset.y = y;
+                        dot.style.transform = `translate(${x}px, ${y}px)`;
                         dot.dataset.init = "true";
                     }
 
-                    const startLeft = dot.style.left;
-                    const startTop = dot.style.top;
+                    const startX = parseFloat(dot.dataset.x);
+                    const startY = parseFloat(dot.dataset.y);
+                    const endX = Math.random() * (vw - 50);
+                    const endY = Math.random() * (vh - 50);
 
-                    const endLeft = Math.random() * (vw - 50) + "px";
-                    const endTop = Math.random() * (vh - 50) + "px";
-
-                    // animação via Web Animations (já é leve)
                     const animation = dot.animate(
                         [
-                            { left: startLeft, top: startTop },
-                            { left: endLeft, top: endTop },
+                            {
+                                transform: `translate(${startX}px, ${startY}px)`,
+                            },
+                            {
+                                transform: `translate(${endX}px, ${endY}px)`,
+                            },
                         ],
                         {
                             duration: 3000 + Math.random() * 2000,
@@ -169,10 +172,10 @@
                         }
                     );
 
-                    // O truque que deixa mais leve: requestAnimationFrame ao invés de setTimeout
                     animation.finished.then(() => {
-                        dot.style.left = endLeft;
-                        dot.style.top = endTop;
+                        dot.dataset.x = endX;
+                        dot.dataset.y = endY;
+                        dot.style.transform = `translate(${endX}px, ${endY}px)`;
 
                         requestAnimationFrame(() => animateDot(dot));
                     });
@@ -180,7 +183,7 @@
 
                 const dots = document.querySelectorAll(".dot");
                 dots.forEach((dot, i) => {
-                    setTimeout(() => animateDot(dot), i * 500);
+                    setTimeout(() => animateDot(dot), i * 1500);
                 });
             }
         </script>
