@@ -26,7 +26,7 @@ function Home() {
     return (
         <main className="pb-5 relative overflow-hidden">
             <article role="article">
-                <div className="flex gap-10 items-end justify-between">
+                <div className="flex min-[500px]:gap-10 items-end justify-between">
                     <div className="flex flex-col gap-6">
                         <div>
                             <div className="relative left-4 top-2 min-[500px]:hidden">
@@ -89,7 +89,7 @@ function Home() {
                             </div>
                         </div>
                         <div>
-                            <p className="block font-medium text-block text-block-1">
+                            <p className="block font-medium text-justify text-block text-block-1">
                                 Olá, meu nome é José Zeito, também conhecido por
                                 Jozeito. Nos últimos dois anos, tenho me
                                 dedicado ao estudo do mundo da Engenharia de
@@ -107,7 +107,7 @@ function Home() {
                 </div>
 
                 <div className="my-10 font-medium flex flex-col gap-5">
-                    <p className="block text-block  text-block-3">
+                    <p className="block text-block text-justify text-block-3">
                         Por mais de dois anos, tenho estudado o mundo da
                         Engenharia de Software mais concretamente Front-end
                         Development, estou comprometido em transformar conceitos
@@ -115,7 +115,7 @@ function Home() {
                         impressionante com funcionalidades robustas.
                     </p>
 
-                    <p className="block text-block  text-block-4">
+                    <p className="block text-block text-justify text-block-4">
                         Como desenvolvedor frontend, possuo sólida experiência
                         em HTML, CSS e JavaScript, bem como em frameworks
                         modernos como React, Vue.js e Angular. Garanto layouts
